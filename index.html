@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid-Day Meal Analytics Hub - e-Shikshakosh</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ApexCharts Script (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Compiled Local Data Script -->
+    <script src="js/data.js"></script>
+</head>
+<body>
+    <!-- Top Navbar -->
+    <header class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo"><i class="fas fa-chart-pie"></i></div>
+            <div class="navbar-title">e-Shikshakosh MDM Analytics</div>
+        </div>
+        <div class="navbar-actions">
+            <button class="btn-theme-toggle" title="Toggle Light/Dark Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Horizontal Navigation Tabs -->
+    <nav class="tabs-container">
+        <ul class="nav-tabs">
+            <li class="nav-tab active" data-target="panel-overview">
+                <i class="fas fa-th-large"></i> Overview & Funnel
+            </li>
+            <li class="nav-tab" data-target="panel-served">
+                <i class="fas fa-user-graduate"></i> Served Students
+            </li>
+            <li class="nav-tab" data-target="panel-stock">
+                <i class="fas fa-warehouse"></i> Stock Register
+            </li>
+            <li class="nav-tab" data-target="panel-tagged">
+                <i class="fas fa-tags"></i> School Tagging
+            </li>
+            <li class="nav-tab" data-target="panel-interruption">
+                <i class="fas fa-utensils"></i> Meal Interruptions
+            </li>
+            <li class="nav-tab" data-target="panel-citations">
+                <i class="fas fa-clipboard-list"></i> Citations Directory
+            </li>
+            <li class="nav-tab" data-target="panel-nonreporting">
+                <i class="fas fa-school-slash"></i> Non-Reporting Summary
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+        <!-- ================= PANEL 1: OVERVIEW & FUNNEL ================= -->
+        <section id="panel-overview" class="tab-panel active animated-fade-in">
+            <div class="header-title-bar">
+                <h1>Executive Compliance Overview</h1>
+                <p>State-level funnel statistics showing reporting flow for PM Poshan Mid-Day Meal (MDM) program</p>
+            </div>
+
+            <!-- Operational Warning Callout -->
+            <div class="table-card" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(239, 68, 68, 0.2); margin-bottom: 2rem; padding: 1.25rem;">
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <div style="font-size: 24px; color: var(--danger); margin-top: 2px;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <strong style="color: var(--danger); font-size: 1rem; font-family: var(--font-heading);">Critical Operational Deficit Detected</strong>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem; line-height: 1.5;">
+                            Out of <strong>66,797 eligible schools</strong> tagged for MDM today, only <strong>2 schools</strong> have successfully submitted their MDM reports. This represents a submission compliance rate of <strong>0.003%</strong>. Urgent review is required.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Registered Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--accent-light); color: var(--accent);"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="kpi-value">76,254</div>
+                    <div class="kpi-footer"><span>Statewide base in database</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Tagged for MDM (Eligible)</span>
+                        <div class="kpi-icon" style="background-color: var(--success-bg); color: var(--success);"><i class="fas fa-link"></i></div>
+                    </div>
+                    <div class="kpi-value">66,797</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-up">87.6%</span><span>School coverage ratio</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Reporting Deficit Today</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-school-slash"></i></div>
+                    </div>
+                    <div class="kpi-value" style="color: var(--danger);">66,795</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-down">99.997%</span><span>Of eligible schools missed reports</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Active Stock updated</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-warehouse"></i></div>
+                    </div>
+                    <div class="kpi-value">4,706 Kg</div>
+                    <div class="kpi-footer"><span>Reported grain stock statewide</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid-full chart-card" style="margin-bottom: 2rem;">
+                <div class="chart-header">
+                    <div>
+                        <span class="chart-title">Mid-Day Meal Reporting Compliance Funnel</span>
+                        <div class="chart-subtitle">Progress drop-off showing school status from registered base to daily submission</div>
+                    </div>
+                </div>
+                <div class="chart-container" style="min-height: 300px;">
+                    <div id="overview-funnel-chart"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 2: SERVED STUDENTS ================= -->
+        <section id="panel-served" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>Served Students Count Report</h1>
+                <p>Analysis of students served Mid-Day Meal (MDM) compared to enrollment and eligibility</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Eligible Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="kpi-value" id="served-kpi-eligible">-</div>
+                    <div class="kpi-footer"><span>Tagged for MDM statewide</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Schools Submitted Report</span>
+                        <div class="kpi-icon" style="background-color: var(--success-bg); color: var(--success);"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="kpi-value" id="served-kpi-submitted">-</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-down" id="served-kpi-subrate">-</span><span>Submission compliance</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Enrolled Students</span>
+                        <div class="kpi-icon" style="background-color: var(--accent-light); color: var(--accent);"><i class="fas fa-users"></i></div>
+                    </div>
+                    <div class="kpi-value" id="served-kpi-enrolled">-</div>
+                    <div class="kpi-footer"><span>In reporting schools</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Students Served MDM</span>
+                        <div class="kpi-icon" style="background-color: var(--warning-bg); color: var(--warning);"><i class="fas fa-utensils"></i></div>
+                    </div>
+                    <div class="kpi-value" id="served-kpi-served">-</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-up" id="served-kpi-ratio">-</span><span>Meal serving ratio</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">District-wise Eligible vs. Submitted Schools</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="served-school-chart"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Students Enrolled vs. Served MDM</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="served-student-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="chart-header">
+                    <span class="chart-title">District-wise Student Meal Summary</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-served">
+                        <thead>
+                            <tr>
+                                <th>SLN#</th>
+                                <th>District Name</th>
+                                <th class="text-right">Total Schools</th>
+                                <th class="text-right">Eligible Schools</th>
+                                <th class="text-right">Submitted Reports</th>
+                                <th class="text-right">Enrolled Students</th>
+                                <th class="text-right">Served Students</th>
+                                <th class="text-right">Reporting Pct (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 3: STOCK REGISTER ================= -->
+        <section id="panel-stock" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>School Grain Stock Register</h1>
+                <p>Inventory level monitoring across eligible schools and reporting districts</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Eligible Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="kpi-value" id="stock-kpi-eligible">-</div>
+                    <div class="kpi-footer"><span>Base count for stock updates</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Total Updated Stock</span>
+                        <div class="kpi-icon" style="background-color: var(--success-bg); color: var(--success);"><i class="fas fa-cubes"></i></div>
+                    </div>
+                    <div class="kpi-value" id="stock-kpi-total">-</div>
+                    <div class="kpi-footer"><span>Grain stock statewide balance</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Average Stock per School</span>
+                        <div class="kpi-icon" style="background-color: var(--warning-bg); color: var(--warning);"><i class="fas fa-balance-scale"></i></div>
+                    </div>
+                    <div class="kpi-value" id="stock-kpi-average">-</div>
+                    <div class="kpi-footer"><span style="color: var(--danger);"><i class="fas fa-exclamation-circle"></i> Low inventory filing rate</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Highest Stock District</span>
+                        <div class="kpi-icon" style="background-color: var(--accent-light); color: var(--accent);"><i class="fas fa-award"></i></div>
+                    </div>
+                    <div class="kpi-value" id="stock-kpi-highest" style="font-size: 1.45rem; height: 36px; display: flex; align-items: center;">-</div>
+                    <div class="kpi-footer"><span id="stock-kpi-highest-value">-</span><span> Kg of stock</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Top 15 Districts with Highest Updated Stock (Kg)</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="stock-top-chart"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Eligible Schools vs. Stock Updated (Kg) by District</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="stock-compare-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="chart-header">
+                    <span class="chart-title">District-wise Inventory Stock Registry</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-stock">
+                        <thead>
+                            <tr>
+                                <th>SLN#</th>
+                                <th>District Name</th>
+                                <th class="text-right">Total Schools</th>
+                                <th class="text-right">Eligible Schools</th>
+                                <th class="text-right">Updated Stock (Kg)</th>
+                                <th class="text-right">Avg Stock / School (Kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 4: SCHOOL TAGGING ================= -->
+        <section id="panel-tagged" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>MDM Logistics Tagging Status</h1>
+                <p>Mapping registered schools to supply chain delivery networks</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Total Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--accent-light); color: var(--accent);"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="kpi-value" id="tagging-kpi-total">-</div>
+                    <div class="kpi-footer"><span>Registered school database</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Tagged Schools (Eligible)</span>
+                        <div class="kpi-icon" style="background-color: var(--success-bg); color: var(--success);"><i class="fas fa-link"></i></div>
+                    </div>
+                    <div class="kpi-value" id="tagging-kpi-tagged">-</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-up" id="tagging-kpi-tagged-percent">-</span><span>Active mapping coverage</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Untagged Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-unlink"></i></div>
+                    </div>
+                    <div class="kpi-value" id="tagging-kpi-untagged">-</div>
+                    <div class="kpi-footer"><span class="trend-badge trend-down" id="tagging-kpi-untagged-percent">-</span><span>Ineligible or pending mapping</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Tagging Coverage Grade</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-star"></i></div>
+                    </div>
+                    <div class="kpi-value" id="tagging-kpi-grade" style="color: var(--success);">A-</div>
+                    <div class="kpi-footer"><span>Target: >95% mapping coverage</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Statewide Logistics Mapping Distribution</span>
+                    </div>
+                    <div class="chart-container" style="display: flex; align-items: center; justify-content: center; min-height: 350px;">
+                        <div id="tagging-pie-chart" style="width: 100%; max-width: 310px;"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">District-wise Tagging Coverage Summary</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="tagging-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="chart-header">
+                    <span class="chart-title">District-wise Supply Mapping Audit Details</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-tagging">
+                        <thead>
+                            <tr>
+                                <th>SLN#</th>
+                                <th>District Name</th>
+                                <th class="text-right">Total Schools</th>
+                                <th class="text-right">Tagged Schools</th>
+                                <th class="text-right">Untagged Schools</th>
+                                <th class="text-right">Tagged Pct (%)</th>
+                                <th class="text-right">Untagged Pct (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 5: MEAL INTERRUPTIONS ================= -->
+        <section id="panel-interruption" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>MDM Interruption Analysis</h1>
+                <p>Auditing why schools failed to serve Mid-Day Meals to pupils today</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Total Interruption Incidents</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+                    </div>
+                    <div class="kpi-value" id="inter-kpi-total">-</div>
+                    <div class="kpi-footer"><span>Reported cases of meal failures</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Primary Cooking Deficit</span>
+                        <div class="kpi-icon" style="background-color: var(--warning-bg); color: var(--warning);"><i class="fas fa-bullhorn"></i></div>
+                    </div>
+                    <div class="kpi-value" id="inter-kpi-cause" style="font-size: 1.35rem; height: 36px; display: flex; align-items: center;">-</div>
+                    <div class="kpi-footer"><span id="inter-kpi-cause-count">-</span><span> schools impacted</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Worst Affected District</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-map-marked-alt"></i></div>
+                    </div>
+                    <div class="kpi-value" id="inter-kpi-worst-district" style="font-size: 1.45rem; height: 36px; display: flex; align-items: center;">-</div>
+                    <div class="kpi-footer"><span id="inter-kpi-worst-count">-</span><span> schools failed to serve lunch</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Serving Reliability Pct</span>
+                        <div class="kpi-icon" style="background-color: var(--success-bg); color: var(--success);"><i class="fas fa-shield-alt"></i></div>
+                    </div>
+                    <div class="kpi-value" id="inter-kpi-reliability">-</div>
+                    <div class="kpi-footer"><span>Statewide meal security ratio</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Non-Serving Incidents by District (Top 10)</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="inter-district-chart"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Meal Interruption Reasons Breakdown</span>
+                    </div>
+                    <div class="chart-container" style="display: flex; align-items: center; justify-content: center; min-height: 350px;">
+                        <div id="inter-reasons-chart" style="width: 100%; max-width: 320px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="chart-header">
+                    <span class="chart-title">District-wise Reason Breakdown Ledger</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-inter" style="font-size: 0.8125rem;">
+                        <thead>
+                            <tr>
+                                <th>District Name</th>
+                                <th class="text-right">Total School</th>
+                                <th class="text-right">Grain Lack</th>
+                                <th class="text-right">LPG Lack</th>
+                                <th class="text-right">Water Prob</th>
+                                <th class="text-right">No Cook</th>
+                                <th class="text-right">Vendor Prob</th>
+                                <th class="text-right">Absent</th>
+                                <th class="text-right">VSS Prob</th>
+                                <th class="text-right">Dispute</th>
+                                <th class="text-right">1-Teacher</th>
+                                <th class="text-right">Holiday</th>
+                                <th class="text-right">Flood</th>
+                                <th class="text-right">Other</th>
+                                <th class="text-right" style="background-color: var(--accent-light); font-weight: bold;">Total Deficit</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 6: CITATIONS DIRECTORY ================= -->
+        <section id="panel-citations" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>Submission Citations Directory & Explorer</h1>
+                <p>Interactive register of schools failing to report daily activities with specific citation reasons</p>
+            </div>
+
+            <!-- Interactive Reason-Wise Filter Panel -->
+            <div class="filter-panel">
+                <div class="filter-header">
+                    <span class="filter-title"><i class="fas fa-filter"></i> Select Interruption Reasons to Analyze</span>
+                    <div class="filter-actions">
+                        <button id="btn-select-all-reasons" class="btn-filter-action">Select All</button>
+                        <button id="btn-clear-all-reasons" class="btn-filter-action">Clear All</button>
+                    </div>
+                </div>
+                <div class="checkbox-grid" id="reasons-checkbox-grid">
+                    <!-- Checkboxes dynamically generated by JS -->
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Matching Impacted Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="kpi-value" id="citations-kpi-deficient">-</div>
+                    <div class="kpi-footer"><span>Schools matching selected reasons</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Affected Districts Count</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-map-marked-alt"></i></div>
+                    </div>
+                    <div class="kpi-value" id="citations-kpi-avg">-</div>
+                    <div class="kpi-footer"><span>Unique districts with failures</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Affected Blocks Count</span>
+                        <div class="kpi-icon" style="background-color: var(--warning-bg); color: var(--warning);"><i class="fas fa-cubes"></i></div>
+                    </div>
+                    <div class="kpi-value" id="citations-kpi-worst">-</div>
+                    <div class="kpi-footer"><span>Unique blocks with failures</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Total Interruption Incidents</span>
+                        <div class="kpi-icon" style="background-color: var(--accent-light); color: var(--accent);"><i class="fas fa-exclamation-circle"></i></div>
+                    </div>
+                    <div class="kpi-value" id="citations-kpi-total">-</div>
+                    <div class="kpi-footer"><span>Cumulative reasons across schools</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Top Impacted Districts</span>
+                        <div class="chart-subtitle">Districts with the most schools affected by selected reasons</div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="citations-district-chart"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Top Impacted Blocks</span>
+                        <div class="chart-subtitle">Blocks with the most schools affected by selected reasons</div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="citations-reasons-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- District & Block Breakdown Table -->
+            <div class="table-card" style="margin-top: 1.5rem;">
+                <div class="chart-header" style="flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <span class="chart-title">District & Block Breakdown Counts</span>
+                        <div class="chart-subtitle">Aggregated counts of affected schools grouped by district and block under selected reasons</div>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="search-input-breakdown" placeholder="Search district or block..." 
+                               style="padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); outline: none; width: 220px; font-size: 0.875rem;">
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-breakdown">
+                        <thead>
+                            <tr>
+                                <th>District Name</th>
+                                <th>Block Name</th>
+                                <th class="text-right">Schools Affected Count</th>
+                                <th style="width: 150px; text-align: center;">Severity Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamically loaded -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Double-click safe interactive table -->
+            <div class="table-card" style="margin-top: 1.5rem;">
+                <div class="chart-header" style="flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <span class="chart-title">Detailed School Citation Ledger</span>
+                        <div class="chart-subtitle">Audit records of deficient schools and their cited causes</div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem; align-items: center;" class="search-container">
+                        <input type="text" id="search-input-citations" placeholder="Search school name or UDISE..." 
+                               style="padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); outline: none; width: 220px; font-size: 0.875rem;">
+                        <select id="district-filter-citations" 
+                                style="padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); outline: none; font-size: 0.875rem;">
+                            <option value="">All Districts</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table" id="table-citations">
+                        <thead>
+                            <tr>
+                                <th>UDISE Code</th>
+                                <th>School Name</th>
+                                <th>District</th>
+                                <th>Block</th>
+                                <th>Category</th>
+                                <th>Management</th>
+                                <th style="text-align: center; width: 120px;">Citations Count</th>
+                                <th>Specific Reasons Cited</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <span style="font-size: 0.875rem; color: var(--text-secondary);" id="citations-pagination-info">Showing 0 to 0 of 0 entries</span>
+                    <div style="display: flex; gap: 0.25rem;">
+                        <button id="citations-prev-btn" class="btn-theme-toggle" style="width: auto; padding: 0.5rem 0.75rem;" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button id="citations-next-btn" class="btn-theme-toggle" style="width: auto; padding: 0.5rem 0.75rem;" disabled><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PANEL 7: NON-REPORTING SUMMARY ================= -->
+        <section id="panel-nonreporting" class="tab-panel animated-fade-in">
+            <div class="header-title-bar">
+                <h1>Non-Reporting Schools Analysis</h1>
+                <p>Summary breakdown of the 66,795 schools failing to report daily MDM metrics</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Non-Reporting Schools</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-school-slash"></i></div>
+                    </div>
+                    <div class="kpi-value">66,795</div>
+                    <div class="kpi-footer"><span>Filing deficit today</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Deficit Pct (%)</span>
+                        <div class="kpi-icon" style="background-color: var(--danger-bg); color: var(--danger);"><i class="fas fa-percent"></i></div>
+                    </div>
+                    <div class="kpi-value">99.99%</div>
+                    <div class="kpi-footer"><span>Of eligible school base</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Most Deficient District</span>
+                        <div class="kpi-icon" style="background-color: var(--warning-bg); color: var(--warning);"><i class="fas fa-map-marker-alt"></i></div>
+                    </div>
+                    <div class="kpi-value" id="nonrep-kpi-worst-district" style="font-size: 1.45rem; height: 36px; display: flex; align-items: center;">-</div>
+                    <div class="kpi-footer"><span id="nonrep-kpi-worst-count">-</span><span> non-reporting schools</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Reporting Districts</span>
+                        <div class="kpi-icon" style="background-color: var(--info-bg); color: var(--info);"><i class="fas fa-globe"></i></div>
+                    </div>
+                    <div class="kpi-value">38</div>
+                    <div class="kpi-footer"><span>All districts reporting deficits</span></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Non-Reporting Schools by District (Top 15)</span>
+                    </div>
+                    <div class="chart-container">
+                        <div id="nonrep-district-chart"></div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="chart-card" style="flex: 1;">
+                        <div class="chart-header">
+                            <span class="chart-title">Breakdown by School Category</span>
+                        </div>
+                        <div class="chart-container" style="display: flex; align-items: center; justify-content: center; min-height: 200px;">
+                            <div id="nonrep-category-chart" style="width: 100%; max-width: 280px;"></div>
+                        </div>
+                    </div>
+                    <div class="chart-card" style="flex: 1;">
+                        <div class="chart-header">
+                            <span class="chart-title">Breakdown by School Management</span>
+                        </div>
+                        <div class="chart-container" style="display: flex; align-items: center; justify-content: center; min-height: 200px;">
+                            <div id="nonrep-management-chart" style="width: 100%; max-width: 280px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Layout Swapping script -->
+    <script src="js/app.js"></script>
+    <script src="js/chart-utils.js"></script>
+    
+    <!-- Main Dashboard Controller (Synchronous CORS-Free Loading) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get local compiled data
+            const mdmData = window.MDM_DATA;
+            if(!mdmData) {
+                console.error("CORS local data is not loaded. Make sure js/data.js is present.");
+                return;
+            }
+
+            function cleanNum(val) {
+                if (val === null || val === undefined) return 0;
+                return val.toLocaleString();
+            }
+
+            // ==========================================
+            // 1. STATEWIDE FUNNEL OVERVIEW (PANEL 1)
+            // ==========================================
+            const funnelOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{
+                    name: 'Schools Count',
+                    data: [76254, 66797, 4706, 2]
+                }],
+                chart: {
+                    id: 'overview-funnel-chart',
+                    height: 300,
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        barHeight: '50%',
+                        distributed: true,
+                        borderRadius: 4,
+                        dataLabels: { position: 'center' }
+                    }
+                },
+                colors: ['#7c3aed', '#10b981', '#f59e0b', '#ef4444'],
+                xaxis: {
+                    categories: ['Total Schools', 'Tagged / Eligible', 'Stock Updated', 'Submitted MDM Today'],
+                },
+                legend: { show: false },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return val.toLocaleString() + ' schools';
+                    },
+                    style: { colors: ['#fff'], fontWeight: 'bold' }
+                }
+            });
+            const funnelChart = new ApexCharts(document.querySelector("#overview-funnel-chart"), funnelOpts);
+            funnelChart.render();
+            ChartUtils.registerChart(funnelChart);
+
+
+            // ==========================================
+            // 2. SERVED STUDENTS ANALYTICS (PANEL 2)
+            // ==========================================
+            const servedJson = mdmData.served_count;
+            const servedData = servedJson.data;
+            const servedSummary = servedJson.summary;
+
+            document.getElementById('served-kpi-eligible').textContent = cleanNum(servedSummary["Total No. of Schools Eligible for MDM"]);
+            document.getElementById('served-kpi-submitted').textContent = cleanNum(servedSummary["Total No. of School Submitted MDM"]);
+            document.getElementById('served-kpi-enrolled').textContent = cleanNum(servedSummary["Total Students Enrolled in Schools Submitted MDM"]);
+            document.getElementById('served-kpi-served').textContent = cleanNum(servedSummary["Total Students Served MDM in Schools Submitted MDM"]);
+
+            const stEligibleCount = servedSummary["Total No. of Schools Eligible for MDM"];
+            const subRateVal = stEligibleCount > 0 ? (servedSummary["Total No. of School Submitted MDM"] / stEligibleCount * 100).toFixed(3) : "0.000";
+            document.getElementById('served-kpi-subrate').textContent = subRateVal + "%";
+
+            const servedVal = servedSummary["Total Students Served MDM in Schools Submitted MDM"];
+            const enrolledVal = servedSummary["Total Students Enrolled in Schools Submitted MDM"];
+            const servRatio = enrolledVal > 0 ? (servedVal / enrolledVal * 100).toFixed(1) : 0;
+            document.getElementById('served-kpi-ratio').textContent = servRatio + "%";
+
+            // Populate Served Table
+            servedData.sort((a,b) => a["District Name"].localeCompare(b["District Name"]));
+            const tbodyServed = document.querySelector('#table-served tbody');
+            servedData.forEach((row, i) => {
+                const tr = document.createElement('tr');
+                const rowElig = row["Total No. of Schools Eligible for MDM"];
+                const rate = rowElig > 0 ? (row["Total No. of School Submitted MDM"] / rowElig * 100).toFixed(2) : "0.00";
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td><strong>${row["District Name"]}</strong></td>
+                    <td class="text-right">${cleanNum(row["Total No. of Schools"])}</td>
+                    <td class="text-right">${cleanNum(rowElig)}</td>
+                    <td class="text-right"><span class="badge ${row["Total No. of School Submitted MDM"] > 0 ? 'badge-success' : 'badge-danger'}">${cleanNum(row["Total No. of School Submitted MDM"])}</span></td>
+                    <td class="text-right">${cleanNum(row["Total Students Enrolled in Schools Submitted MDM"])}</td>
+                    <td class="text-right">${cleanNum(row["Total Students Served MDM in Schools Submitted MDM"])}</td>
+                    <td class="text-right">${rate}%</td>
+                `;
+                tbodyServed.appendChild(tr);
+            });
+
+            // Served Charts
+            const servedDistricts = servedData.map(d => d["District Name"]);
+            const servedEligibleList = servedData.map(d => d["Total No. of Schools Eligible for MDM"]);
+            const servedSubList = servedData.map(d => d["Total No. of School Submitted MDM"]);
+            
+            const servedSchoolOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [
+                    { name: 'Eligible Schools', data: servedEligibleList },
+                    { name: 'Submitted MDM', data: servedSubList }
+                ],
+                chart: { id: 'served-school-chart', height: 320 },
+                xaxis: { categories: servedDistricts, labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#7c3aed', '#10b981']
+            });
+            const servedSchoolChart = new ApexCharts(document.querySelector("#served-school-chart"), servedSchoolOpts);
+            servedSchoolChart.render();
+            ChartUtils.registerChart(servedSchoolChart);
+
+            const enrolledList = servedData.map(d => d["Total Students Enrolled in Schools Submitted MDM"]);
+            const actualServedList = servedData.map(d => d["Total Students Served MDM in Schools Submitted MDM"]);
+
+            const servedStudentOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [
+                    { name: 'Enrolled in Reporting', data: enrolledList },
+                    { name: 'Served MDM', data: actualServedList }
+                ],
+                chart: { id: 'served-student-chart', height: 320 },
+                xaxis: { categories: servedDistricts, labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#0ea5e9', '#f59e0b']
+            });
+            const servedStudentChart = new ApexCharts(document.querySelector("#served-student-chart"), servedStudentOpts);
+            servedStudentChart.render();
+            ChartUtils.registerChart(servedStudentChart);
+
+
+            // ==========================================
+            // 3. STOCK ANALYTICS (PANEL 3)
+            // ==========================================
+            const stockJson = mdmData.stock_report;
+            const stockData = stockJson.data;
+            const stockSummary = stockJson.summary;
+
+            const stEligible = stockSummary["Total No. of Schools Elligible for MDM"] || stockSummary["Total No. of Schools Eligible for MDM"];
+            document.getElementById('stock-kpi-eligible').textContent = cleanNum(stEligible);
+            document.getElementById('stock-kpi-total').textContent = cleanNum(stockSummary["Total Updated Stock (Kg)"]) + " Kg";
+            const avgStockVal = stEligible > 0 ? (stockSummary["Total Updated Stock (Kg)"] / stEligible).toFixed(3) : "0.000";
+            document.getElementById('stock-kpi-average').textContent = avgStockVal + " Kg";
+
+            const stockSorted = [...stockData].sort((a,b) => b["Total Updated Stock (Kg)"] - a["Total Updated Stock (Kg)"]);
+            if(stockSorted.length > 0) {
+                document.getElementById('stock-kpi-highest').textContent = stockSorted[0]["District Name"];
+                document.getElementById('stock-kpi-highest-value').textContent = cleanNum(stockSorted[0]["Total Updated Stock (Kg)"]);
+            }
+
+            // Populate Stock Table
+            stockData.sort((a,b) => a["District Name"].localeCompare(b["District Name"]));
+            const tbodyStock = document.querySelector('#table-stock tbody');
+            stockData.forEach((row, i) => {
+                const tr = document.createElement('tr');
+                const rowEligible = row["Total No. of Schools Elligible for MDM"] || row["Total No. of Schools Eligible for MDM"];
+                const rowAvg = rowEligible > 0 ? (row["Total Updated Stock (Kg)"] / rowEligible).toFixed(3) : 0;
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td><strong>${row["District Name"]}</strong></td>
+                    <td class="text-right">${cleanNum(row["Total Schools"])}</td>
+                    <td class="text-right">${cleanNum(rowEligible)}</td>
+                    <td class="text-right"><span class="badge ${row["Total Updated Stock (Kg)"] > 100 ? 'badge-success' : (row["Total Updated Stock (Kg)"] > 0 ? 'badge-warning' : 'badge-danger')}">${cleanNum(row["Total Updated Stock (Kg)"])} Kg</span></td>
+                    <td class="text-right">${rowAvg} Kg</td>
+                `;
+                tbodyStock.appendChild(tr);
+            });
+
+            // Stock Charts
+            const stockTopNames = stockSorted.slice(0, 15).map(d => d["District Name"]);
+            const stockTopValues = stockSorted.slice(0, 15).map(d => d["Total Updated Stock (Kg)"]);
+
+            const stockTopOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{ name: 'Stock (Kg)', data: stockTopValues }],
+                chart: { id: 'stock-top-chart', height: 320 },
+                plotOptions: { bar: { horizontal: true, borderRadius: 4 } },
+                xaxis: { categories: stockTopNames },
+                colors: ['#10b981']
+            });
+            const stockTopChart = new ApexCharts(document.querySelector("#stock-top-chart"), stockTopOpts);
+            stockTopChart.render();
+            ChartUtils.registerChart(stockTopChart);
+
+            const stockDistricts = stockData.map(d => d["District Name"]);
+            const stockEligibleList = stockData.map(d => d["Total No. of Schools Elligible for MDM"] || d["Total No. of Schools Eligible for MDM"]);
+            const stockUpdatedList = stockData.map(d => d["Total Updated Stock (Kg)"]);
+
+            const stockCompareOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('line'), {
+                series: [
+                    { name: 'Eligible Schools', type: 'column', data: stockEligibleList },
+                    { name: 'Stock (Kg)', type: 'line', data: stockUpdatedList }
+                ],
+                chart: { id: 'stock-compare-chart', height: 320 },
+                stroke: { width: [0, 3] },
+                xaxis: { categories: stockDistricts, labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#a855f7', '#0ea5e9']
+            });
+            const stockCompareChart = new ApexCharts(document.querySelector("#stock-compare-chart"), stockCompareOpts);
+            stockCompareChart.render();
+            ChartUtils.registerChart(stockCompareChart);
+
+
+            // ==========================================
+            // 4. SCHOOL TAGGING ANALYTICS (PANEL 4)
+            // ==========================================
+            const tagJson = mdmData.school_tagged;
+            const tagData = tagJson.data;
+            const tagSummary = tagJson.summary;
+
+            const tagTotal = tagSummary["Total Schools"];
+            const tagTagged = tagSummary["Total No. of Schools Tagged for MDM"];
+            const tagUntagged = tagSummary["Total No. of Schools UnTagged for MDM"];
+
+            document.getElementById('tagging-kpi-total').textContent = cleanNum(tagTotal);
+            document.getElementById('tagging-kpi-tagged').textContent = cleanNum(tagTagged);
+            document.getElementById('tagging-kpi-untagged').textContent = cleanNum(tagUntagged);
+            
+            const tagTaggedPercent = tagTotal > 0 ? (tagTagged / tagTotal * 100).toFixed(1) : "0.0";
+            document.getElementById('tagging-kpi-tagged-percent').textContent = tagTaggedPercent + "%";
+            const tagUntaggedPercent = tagTotal > 0 ? (tagUntagged / tagTotal * 100).toFixed(1) : "0.0";
+            document.getElementById('tagging-kpi-untagged-percent').textContent = tagUntaggedPercent + "%";
+
+            // Tagging Grade
+            const tagGradeEl = document.getElementById('tagging-kpi-grade');
+            const tagGradeNum = parseFloat(tagTaggedPercent);
+            if (tagGradeNum >= 95) { tagGradeEl.textContent = "A"; tagGradeEl.style.color = "var(--success)"; }
+            else if (tagGradeNum >= 90) { tagGradeEl.textContent = "A-"; tagGradeEl.style.color = "var(--success)"; }
+            else if (tagGradeNum >= 85) { tagGradeEl.textContent = "B+"; tagGradeEl.style.color = "var(--info)"; }
+            else if (tagGradeNum >= 80) { tagGradeEl.textContent = "B"; tagGradeEl.style.color = "var(--info)"; }
+            else { tagGradeEl.textContent = "C"; tagGradeEl.style.color = "var(--warning)"; }
+
+            // Populate Tagging Table
+            tagData.sort((a,b) => a["District Name"].localeCompare(b["District Name"]));
+            const tbodyTag = document.querySelector('#table-tagging tbody');
+            tagData.forEach((row, i) => {
+                const tr = document.createElement('tr');
+                const rowTotal = row["Total Schools"];
+                const rowTagged = row["Total No. of Schools Tagged for MDM"];
+                const rowUntagged = row["Total No. of Schools UnTagged for MDM"];
+                const rTaggedPct = rowTotal > 0 ? (rowTagged / rowTotal * 100).toFixed(1) : 0;
+                const rUntaggedPct = rowTotal > 0 ? (rowUntagged / rowTotal * 100).toFixed(1) : 0;
+
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td><strong>${row["District Name"]}</strong></td>
+                    <td class="text-right">${cleanNum(rowTotal)}</td>
+                    <td class="text-right">${cleanNum(rowTagged)}</td>
+                    <td class="text-right">${cleanNum(rowUntagged)}</td>
+                    <td class="text-right">${rTaggedPct}%</td>
+                    <td class="text-right">${rUntaggedPct}%</td>
+                `;
+                tbodyTag.appendChild(tr);
+            });
+
+            // Tagging Pie Chart
+            const tagPieOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('pie'), {
+                series: [tagTagged, tagUntagged],
+                labels: ['Tagged Schools', 'Untagged Schools'],
+                chart: { id: 'tagging-pie-chart', height: 280, type: 'pie' },
+                colors: ['#10b981', '#ef4444'],
+                legend: { position: 'bottom' },
+                stroke: { show: false }
+            });
+            const tagPieChart = new ApexCharts(document.querySelector("#tagging-pie-chart"), tagPieOpts);
+            tagPieChart.render();
+            ChartUtils.registerChart(tagPieChart);
+
+            // Tagging Stacked Bar Chart
+            const tagDistricts = tagData.map(d => d["District Name"]);
+            const tagTaggedList = tagData.map(d => d["Total No. of Schools Tagged for MDM"]);
+            const tagUntaggedList = tagData.map(d => d["Total No. of Schools UnTagged for MDM"]);
+
+            const tagBarOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [
+                    { name: 'Tagged Schools', data: tagTaggedList },
+                    { name: 'Untagged Schools', data: tagUntaggedList }
+                ],
+                chart: { id: 'tagging-bar-chart', height: 320, stacked: true },
+                xaxis: { categories: tagDistricts, labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#10b981', '#ef4444']
+            });
+            const tagBarChart = new ApexCharts(document.querySelector("#tagging-bar-chart"), tagBarOpts);
+            tagBarChart.render();
+            ChartUtils.registerChart(tagBarChart);
+
+
+            // ==========================================
+            // 5. MEAL INTERRUPTIONS ANALYTICS (PANEL 5)
+            // ==========================================
+            const interJson = mdmData.reason_not_served;
+            const interData = interJson.data;
+
+            const interKeys = [
+                "Grain Not Available", "LPG Not Available", "Water Problem",
+                "Cook Not Available", "Vendor Problem", "Student are Absent",
+                "VSS Problem", "Village Dispute", "Single Teacher",
+                "Holiday", "Flood", "Other"
+            ];
+            const interLabels = [
+                "Grain Lack", "LPG Lack", "Water Prob", "No Cook",
+                "Vendor Prob", "Students Absent", "VSS Prob",
+                "Dispute", "Single Teacher", "Holiday", "Flood", "Other"
+            ];
+
+            const interTotals = {};
+            interKeys.forEach(k => interTotals[k] = 0);
+            let interGrandTotal = 0;
+
+            interData.forEach(d => {
+                interKeys.forEach(k => {
+                    const val = parseInt(d[k]) || 0;
+                    interTotals[k] += val;
+                    interGrandTotal += val;
+                });
+            });
+
+            document.getElementById('inter-kpi-total').textContent = interGrandTotal.toLocaleString();
+
+            let interPrimaryCause = "None";
+            let interPrimaryCount = -1;
+            Object.entries(interTotals).forEach(([k, count]) => {
+                if(count > interPrimaryCount) {
+                    interPrimaryCount = count;
+                    interPrimaryCause = k;
+                }
+            });
+            document.getElementById('inter-kpi-cause').textContent = interPrimaryCause === "None" ? "No Incidents" : interPrimaryCause;
+            document.getElementById('inter-kpi-cause-count').textContent = interPrimaryCount.toLocaleString();
+
+            // Worst Affected District
+            let interWorstDistrict = "None";
+            let interWorstCount = -1;
+            interData.forEach(d => {
+                const total = parseInt(d["Total"]) || 0;
+                if(total > interWorstCount) {
+                    interWorstCount = total;
+                    interWorstDistrict = d["District Name"];
+                }
+            });
+            document.getElementById('inter-kpi-worst-district').textContent = interWorstDistrict;
+            document.getElementById('inter-kpi-worst-count').textContent = interWorstCount.toLocaleString();
+
+            const interReliability = interGrandTotal > 0 ? (100 - (interGrandTotal / 76254 * 100)).toFixed(3) : "100";
+            document.getElementById('inter-kpi-reliability').textContent = interReliability + "%";
+
+            // Populate Interruption Table
+            interData.sort((a,b) => a["District Name"].localeCompare(b["District Name"]));
+            const tbodyInter = document.querySelector('#table-inter tbody');
+            interData.forEach(row => {
+                const tr = document.createElement('tr');
+                const rowTotal = parseInt(row["Total"]) || 0;
+                tr.innerHTML = `
+                    <td><strong>${row["District Name"]}</strong></td>
+                    <td class="text-right">${cleanNum(row["Total School"])}</td>
+                    <td class="text-right">${cleanNum(row["Grain Not Available"])}</td>
+                    <td class="text-right">${cleanNum(row["LPG Not Available"])}</td>
+                    <td class="text-right">${cleanNum(row["Water Problem"])}</td>
+                    <td class="text-right">${cleanNum(row["Cook Not Available"])}</td>
+                    <td class="text-right">${cleanNum(row["Vendor Problem"])}</td>
+                    <td class="text-right">${cleanNum(row["Student are Absent"])}</td>
+                    <td class="text-right">${cleanNum(row["VSS Problem"])}</td>
+                    <td class="text-right">${cleanNum(row["Village Dispute"])}</td>
+                    <td class="text-right">${cleanNum(row["Single Teacher"])}</td>
+                    <td class="text-right">${cleanNum(row["Holiday"])}</td>
+                    <td class="text-right">${cleanNum(row["Flood"])}</td>
+                    <td class="text-right">${cleanNum(row["Other"])}</td>
+                    <td class="text-right" style="background-color: var(--accent-light); font-weight: bold; color: ${rowTotal > 0 ? 'var(--danger)' : 'var(--text-primary)'}">${cleanNum(rowTotal)}</td>
+                `;
+                tbodyInter.appendChild(tr);
+            });
+
+            // Interruption Charts
+            const interDistrictList = interData.map(d => ({ name: d["District Name"], count: parseInt(d["Total"]) || 0 }));
+            interDistrictList.sort((a,b) => b.count - a.count);
+            const interTop10Districts = interDistrictList.slice(0, 10);
+            
+            const interDistOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{ name: 'Non-Served Schools', data: interTop10Districts.map(d => d.count) }],
+                chart: { id: 'inter-district-chart', height: 320 },
+                xaxis: { categories: interTop10Districts.map(d => d.name), labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#ef4444']
+            });
+            const interDistChart = new ApexCharts(document.querySelector("#inter-district-chart"), interDistOpts);
+            interDistChart.render();
+            ChartUtils.registerChart(interDistChart);
+
+            const activePieLabels = interLabels.filter((l, idx) => interTotals[interKeys[idx]] > 0);
+            const activePieValues = Object.values(interTotals).filter(v => v > 0);
+            
+            const chartPieLabels = activePieValues.length > 0 ? activePieLabels : ['No Interruption Incidents'];
+            const chartPieValues = activePieValues.length > 0 ? activePieValues : [1];
+            const chartPieColors = activePieValues.length > 0 ? ChartUtils.PALETTES.primary : ['#e2e8f0'];
+
+            const interReasonsOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('donut'), {
+                series: chartPieValues,
+                labels: chartPieLabels,
+                chart: { id: 'inter-reasons-chart', height: 280, type: 'donut' },
+                colors: chartPieColors,
+                legend: { position: 'bottom' },
+                stroke: { show: false }
+            });
+            const interReasonsChart = new ApexCharts(document.querySelector("#inter-reasons-chart"), interReasonsOpts);
+            interReasonsChart.render();
+            ChartUtils.registerChart(interReasonsChart);
+
+
+            // ==========================================
+            // 6. CITATIONS DIRECTORY & EXPLORER (PANEL 6)
+            // ==========================================
+            const citationCounts = mdmData.reason_counts;
+            const citationSchools = mdmData.reason_wise_schools;
+
+            // Reason metadata mapping for friendly UI labels
+            const reasonMetadata = {
+                "Grain not available": { name: "Grain Shortage (Grain not available)", icon: "fa-wheat-awn", color: "#f59e0b" },
+                "LPG not available": { name: "Gas Shortage (LPG not available)", icon: "fa-fire-burner", color: "#ef4444" },
+                "Water problem": { name: "Water Supply Problem", icon: "fa-droplet", color: "#3b82f6" },
+                "Cook not available": { name: "Absent Cook (Cook not available)", icon: "fa-user-slash", color: "#ec4899" },
+                "Vendor problem": { name: "Vendor Supply Issue", icon: "fa-truck", color: "#8b5cf6" },
+                "Students are absent": { name: "Students Absent", icon: "fa-users-slash", color: "#10b981" },
+                "Vss problem": { name: "VSS Committee Problem", icon: "fa-handshake-slash", color: "#6b7280" },
+                "Village dispute": { name: "Local Dispute (Village dispute)", icon: "fa-people-arrows", color: "#f43f5e" },
+                "Single teacher": { name: "Single Teacher School", icon: "fa-chalkboard-user", color: "#a855f7" },
+                "Holiday": { name: "School Holiday", icon: "fa-calendar-day", color: "#06b6d4" },
+                "Flood": { name: "Flooding / Natural Calamity", icon: "fa-house-flood-water", color: "#0ea5e9" },
+                "Food Not Arrived from NGO/SHG": { name: "NGO / SHG Meal Failure", icon: "fa-box-open", color: "#d97706" },
+                "Others": { name: "Other Interruption Causes", icon: "fa-ellipsis-h", color: "#6b7280" }
+            };
+
+            // Calculate exact baseline totals from reason_wise_schools
+            const baselineTotals = {};
+            Object.keys(reasonMetadata).forEach(k => baselineTotals[k] = 0);
+            citationSchools.forEach(s => {
+                (s.reasons || []).forEach(r => {
+                    if (r in baselineTotals) {
+                        baselineTotals[r]++;
+                    } else {
+                        // Handle potential case differences
+                        const match = Object.keys(reasonMetadata).find(k => k.toLowerCase() === r.toLowerCase());
+                        if (match) baselineTotals[match]++;
+                    }
+                });
+            });
+
+            // Set of selected reasons, initially all are checked
+            let selectedReasons = new Set(Object.keys(reasonMetadata));
+
+            // Populate Checkbox Grid UI
+            const checkboxContainer = document.getElementById('reasons-checkbox-grid');
+            checkboxContainer.innerHTML = '';
+
+            Object.entries(reasonMetadata).forEach(([key, meta]) => {
+                const label = document.createElement('label');
+                label.className = 'checkbox-label active';
+                label.setAttribute('data-key', key);
+                
+                label.innerHTML = `
+                    <input type="checkbox" value="${key}" checked>
+                    <i class="fas ${meta.icon}" style="color: ${meta.color};"></i>
+                    <span>${meta.name}</span>
+                    <span class="check-count">${baselineTotals[key]}</span>
+                `;
+                checkboxContainer.appendChild(label);
+            });
+
+            // Handle checkbox interactions
+            checkboxContainer.addEventListener('change', (e) => {
+                if (e.target.type === 'checkbox') {
+                    const key = e.target.value;
+                    const label = e.target.closest('.checkbox-label');
+                    if (e.target.checked) {
+                        selectedReasons.add(key);
+                        label.classList.add('active');
+                    } else {
+                        selectedReasons.delete(key);
+                        label.classList.remove('active');
+                    }
+                    updateExplorerAnalytics();
+                }
+            });
+
+            // "Select All" and "Clear All" buttons
+            document.getElementById('btn-select-all-reasons').addEventListener('click', () => {
+                selectedReasons = new Set(Object.keys(reasonMetadata));
+                document.querySelectorAll('#reasons-checkbox-grid input[type="checkbox"]').forEach(cb => {
+                    cb.checked = true;
+                    cb.closest('.checkbox-label').classList.add('active');
+                });
+                updateExplorerAnalytics();
+            });
+
+            document.getElementById('btn-clear-all-reasons').addEventListener('click', () => {
+                selectedReasons.clear();
+                document.querySelectorAll('#reasons-checkbox-grid input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.checkbox-label').classList.remove('active');
+                });
+                updateExplorerAnalytics();
+            });
+
+            // Initialize Charts
+            const citDistOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{ name: 'Schools Impacted', data: [] }],
+                chart: { id: 'citations-district-chart', height: 320 },
+                xaxis: { categories: [], labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#8b5cf6']
+            });
+            const citDistChart = new ApexCharts(document.querySelector("#citations-district-chart"), citDistOpts);
+            citDistChart.render();
+            ChartUtils.registerChart(citDistChart);
+
+            const citBlockOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{ name: 'Schools Impacted', data: [] }],
+                chart: { id: 'citations-reasons-chart', height: 320 },
+                xaxis: { categories: [], labels: { rotate: -45, style: { fontSize: '9px' } } },
+                colors: ['#0ea5e9']
+            });
+            const citBlockChart = new ApexCharts(document.querySelector("#citations-reasons-chart"), citBlockOpts);
+            citBlockChart.render();
+            ChartUtils.registerChart(citBlockChart);
+
+            // Explorer Datasets
+            let currentFilteredSchools = [];
+            let currentBreakdownData = [];
+            let citFilteredList = [];
+            let citCurrentPage = 1;
+            const citRecordsPerPage = 50;
+
+            function updateExplorerAnalytics() {
+                // 1. Filter schools that have at least one matching reason
+                currentFilteredSchools = citationSchools.filter(s => {
+                    return (s.reasons || []).some(r => {
+                        if (selectedReasons.has(r)) return true;
+                        const match = Object.keys(reasonMetadata).find(k => k.toLowerCase() === r.toLowerCase());
+                        return match && selectedReasons.has(match);
+                    });
+                });
+
+                // 2. Calculate dynamic KPIs
+                const schoolCount = currentFilteredSchools.length;
+                const uniqueDistricts = new Set(currentFilteredSchools.map(s => s.district)).size;
+                const uniqueBlocks = new Set(currentFilteredSchools.map(s => s.block)).size;
+                
+                let totalCitationsCount = 0;
+                currentFilteredSchools.forEach(s => {
+                    (s.reasons || []).forEach(r => {
+                        if (selectedReasons.has(r)) totalCitationsCount++;
+                        else {
+                            const match = Object.keys(reasonMetadata).find(k => k.toLowerCase() === r.toLowerCase());
+                            if (match && selectedReasons.has(match)) totalCitationsCount++;
+                        }
+                    });
+                });
+
+                document.getElementById('citations-kpi-deficient').textContent = schoolCount.toLocaleString();
+                document.getElementById('citations-kpi-avg').textContent = uniqueDistricts.toLocaleString();
+                document.getElementById('citations-kpi-worst').textContent = uniqueBlocks.toLocaleString();
+                document.getElementById('citations-kpi-total').textContent = totalCitationsCount.toLocaleString();
+
+                // 3. Compute Top Districts
+                const districtCounts = {};
+                currentFilteredSchools.forEach(s => {
+                    const dName = (s.district || '').split('-').pop();
+                    districtCounts[dName] = (districtCounts[dName] || 0) + 1;
+                });
+                const sortedDistList = Object.entries(districtCounts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count);
+                
+                const topDists = sortedDistList.slice(0, 12);
+                citDistChart.updateOptions({
+                    xaxis: { categories: topDists.map(x => x.name) },
+                    series: [{ name: 'Schools Impacted', data: topDists.map(x => x.count) }]
+                });
+
+                // 4. Compute Top Blocks
+                const blockCounts = {};
+                currentFilteredSchools.forEach(s => {
+                    const bName = `${(s.block || '').split('-').pop()} (${(s.district || '').split('-').pop()})`;
+                    blockCounts[bName] = (blockCounts[bName] || 0) + 1;
+                });
+                const sortedBlockList = Object.entries(blockCounts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count);
+
+                const topBlocks = sortedBlockList.slice(0, 12);
+                citBlockChart.updateOptions({
+                    xaxis: { categories: topBlocks.map(x => x.name) },
+                    series: [{ name: 'Schools Impacted', data: topBlocks.map(x => x.count) }]
+                });
+
+                // 5. Aggregate Breakdown Data (District & Block)
+                const breakdownMap = {};
+                currentFilteredSchools.forEach(s => {
+                    const key = `${s.district}|||${s.block}`;
+                    breakdownMap[key] = (breakdownMap[key] || 0) + 1;
+                });
+                currentBreakdownData = Object.entries(breakdownMap).map(([key, count]) => {
+                    const [dist, blk] = key.split('|||');
+                    return { district: dist, block: blk, count };
+                }).sort((a, b) => b.count - a.count || a.district.localeCompare(b.district));
+
+                renderBreakdownTable();
+
+                // 6. Refresh Detail School List Filters
+                filterCitationsList();
+            }
+
+            // Render District-Block Breakdown Table
+            function renderBreakdownTable() {
+                const tbody = document.querySelector('#table-breakdown tbody');
+                tbody.innerHTML = '';
+
+                const query = document.getElementById('search-input-breakdown').value.toLowerCase().trim();
+
+                const filteredBreakdown = currentBreakdownData.filter(item => {
+                    const distClean = (item.district || '').toLowerCase();
+                    const blkClean = (item.block || '').toLowerCase();
+                    return distClean.includes(query) || blkClean.includes(query);
+                });
+
+                if (filteredBreakdown.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary); padding: 1.5rem;">No matching district/block records found.</td></tr>`;
+                    return;
+                }
+
+                filteredBreakdown.forEach(row => {
+                    const tr = document.createElement('tr');
+                    const distName = (row.district || '').split('-').pop();
+                    const blockName = (row.block || '').split('-').pop();
+
+                    let badgeClass = 'badge-success';
+                    let badgeText = 'Mild';
+                    if (row.count > 100) {
+                        badgeClass = 'badge-danger';
+                        badgeText = 'Critical';
+                    } else if (row.count > 25) {
+                        badgeClass = 'badge-warning';
+                        badgeText = 'Severe';
+                    }
+
+                    tr.innerHTML = `
+                        <td><strong>${distName}</strong></td>
+                        <td>${blockName}</td>
+                        <td class="text-right"><span style="font-weight: 700;">${row.count.toLocaleString()}</span> schools</td>
+                        <td style="text-align: center;">
+                            <span class="badge ${badgeClass}">${badgeText}</span>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Search input handler for breakdown table
+            document.getElementById('search-input-breakdown').addEventListener('input', () => {
+                renderBreakdownTable();
+            });
+
+            // Populate Citation Filter Select (Dynamic list of all districts)
+            const citationsFilterSelect = document.getElementById('district-filter-citations');
+            citationsFilterSelect.innerHTML = '<option value="">All Districts</option>';
+            
+            const uniqueDistKeys = [...new Set(citationSchools.map(s => s.district))].sort((a,b) => {
+                return a.split('-').pop().localeCompare(b.split('-').pop());
+            });
+            uniqueDistKeys.forEach(d => {
+                const opt = document.createElement('option');
+                opt.value = d;
+                opt.textContent = d.split('-').pop();
+                citationsFilterSelect.appendChild(opt);
+            });
+
+            // Detailed School Table logic
+            function getBadgeColor(reason) {
+                const r = reason.toLowerCase();
+                if(r.includes('grain')) return 'badge-danger';
+                if(r.includes('lpg') || r.includes('gas')) return 'badge-warning';
+                if(r.includes('cook')) return 'badge-danger';
+                if(r.includes('water')) return 'badge-warning';
+                if(r.includes('dispute') || r.includes('teacher') || r.includes('ngo') || r.includes('shg')) return 'badge-danger';
+                return 'badge-success';
+            }
+
+            function renderCitationsTable() {
+                const tbody = document.querySelector('#table-citations tbody');
+                tbody.innerHTML = '';
+
+                if(citFilteredList.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 2rem;">No matching records found.</td></tr>`;
+                    document.getElementById('citations-pagination-info').textContent = 'Showing 0 to 0 of 0 entries';
+                    document.getElementById('citations-prev-btn').disabled = true;
+                    document.getElementById('citations-next-btn').disabled = true;
+                    return;
+                }
+
+                const startIdx = (citCurrentPage - 1) * citRecordsPerPage;
+                const endIdx = Math.min(startIdx + citRecordsPerPage, citFilteredList.length);
+                const pageRecords = citFilteredList.slice(startIdx, endIdx);
+
+                pageRecords.forEach(s => {
+                    const tr = document.createElement('tr');
+                    const badges = (s.reasons || []).map(r => `<span class="badge ${getBadgeColor(r)}" style="margin: 2px;">${r}</span>`).join(' ');
+                    
+                    tr.innerHTML = `
+                        <td><code>${s.udise}</code></td>
+                        <td><strong>${s.name}</strong></td>
+                        <td>${(s.district || '').split('-').pop()}</td>
+                        <td>${(s.block || '').split('-').pop()}</td>
+                        <td>${(s.category || '').split(' - ').pop()}</td>
+                        <td>${(s.management || '').split(' - ').pop()}</td>
+                        <td style="text-align: center;">
+                            <span class="badge ${s.reasons.length > 2 ? 'badge-danger' : (s.reasons.length > 1 ? 'badge-warning' : 'badge-success')}">
+                                ${s.reasons.length} reason${s.reasons.length > 1 ? 's' : ''}
+                            </span>
+                        </td>
+                        <td>${badges}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById('citations-pagination-info').textContent = `Showing ${startIdx + 1} to ${endIdx} of ${citFilteredList.length.toLocaleString()} entries`;
+                document.getElementById('citations-prev-btn').disabled = citCurrentPage === 1;
+                document.getElementById('citations-next-btn').disabled = endIdx >= citFilteredList.length;
+            }
+
+            function filterCitationsList() {
+                const query = document.getElementById('search-input-citations').value.toLowerCase().trim();
+                const district = document.getElementById('district-filter-citations').value;
+
+                citFilteredList = currentFilteredSchools.filter(s => {
+                    const mSearch = (s.name || '').toLowerCase().includes(query) || (s.udise || '').toString().includes(query);
+                    const mDistrict = !district || s.district === district;
+                    return mSearch && mDistrict;
+                });
+                
+                citCurrentPage = 1;
+                renderCitationsTable();
+            }
+
+            function setupCitationsListeners() {
+                const searchInput = document.getElementById('search-input-citations');
+                const districtFilter = document.getElementById('district-filter-citations');
+                const prevBtn = document.getElementById('citations-prev-btn');
+                const nextBtn = document.getElementById('citations-next-btn');
+
+                let searchTimeout;
+                searchInput.addEventListener('input', () => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(filterCitationsList, 200);
+                });
+                districtFilter.addEventListener('change', filterCitationsList);
+
+                prevBtn.addEventListener('click', () => {
+                    if(citCurrentPage > 1) {
+                        citCurrentPage--;
+                        renderCitationsTable();
+                    }
+                });
+                nextBtn.addEventListener('click', () => {
+                    const maxPage = Math.ceil(citFilteredList.length / citRecordsPerPage);
+                    if(citCurrentPage < maxPage) {
+                        citCurrentPage++;
+                        renderCitationsTable();
+                    }
+                });
+            }
+
+            // Set up all key listeners and run initial explorer render
+            setupCitationsListeners();
+            updateExplorerAnalytics();
+
+
+            // ==========================================
+            // 7. NON-REPORTING SUMMARY (PANEL 7)
+            // ==========================================
+            const nonrepJson = mdmData.not_submitted_summary;
+            const nonrepDistricts = nonrepJson.district_counts;
+            const nonrepCategories = nonrepJson.category_counts;
+            const nonrepManagements = nonrepJson.management_counts;
+
+            // Worst District
+            let nonrepWorstDistrict = "";
+            let nonrepWorstCount = -1;
+            const nonrepDistList = [];
+            Object.entries(nonrepDistricts).forEach(([d, c]) => {
+                nonrepDistList.push({ name: d, count: c });
+                if(c > nonrepWorstCount) {
+                    nonrepWorstCount = c;
+                    nonrepWorstDistrict = d;
+                }
+            });
+            document.getElementById('nonrep-kpi-worst-district').textContent = nonrepWorstDistrict.split('-').pop();
+            document.getElementById('nonrep-kpi-worst-count').textContent = nonrepWorstCount.toLocaleString();
+
+            // Non-Reporting District Chart
+            nonrepDistList.sort((a,b) => b.count - a.count);
+            const nonrepTop15 = nonrepDistList.slice(0, 15);
+
+            const nonrepDistOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('bar'), {
+                series: [{ name: 'Missing Reports', data: nonrepTop15.map(x => x.count) }],
+                chart: { id: 'nonrep-district-chart', height: 320 },
+                plotOptions: { bar: { horizontal: true, borderRadius: 4 } },
+                xaxis: { categories: nonrepTop15.map(x => x.name.split('-').pop()) },
+                colors: ['#ef4444']
+            });
+            const nonrepDistChart = new ApexCharts(document.querySelector("#nonrep-district-chart"), nonrepDistOpts);
+            nonrepDistChart.render();
+            ChartUtils.registerChart(nonrepDistChart);
+
+            // Category & Management Donut Charts
+            const nonrepCatOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('donut'), {
+                series: Object.values(nonrepCategories),
+                labels: Object.keys(nonrepCategories).map(c => c.split(' - ').pop()),
+                chart: { id: 'nonrep-category-chart', height: 200, type: 'donut' },
+                colors: ChartUtils.PALETTES.cool,
+                legend: { position: 'bottom', labels: { colors: 'inherit' } },
+                stroke: { show: false }
+            });
+            const nonrepCatChart = new ApexCharts(document.querySelector("#nonrep-category-chart"), nonrepCatOpts);
+            nonrepCatChart.render();
+            ChartUtils.registerChart(nonrepCatChart);
+
+            const nonrepMgtOpts = ChartUtils.mergeObjects(ChartUtils.getDefaultOptions('donut'), {
+                series: Object.values(nonrepManagements),
+                labels: Object.keys(nonrepManagements).map(m => m.split(' - ').pop()),
+                chart: { id: 'nonrep-management-chart', height: 200, type: 'donut' },
+                colors: ChartUtils.PALETTES.warm,
+                legend: { position: 'bottom', labels: { colors: 'inherit' } },
+                stroke: { show: false }
+            });
+            const nonrepMgtChart = new ApexCharts(document.querySelector("#nonrep-management-chart"), nonrepMgtOpts);
+            nonrepMgtChart.render();
+            ChartUtils.registerChart(nonrepMgtChart);
+        });
+    </script>
+</body>
+</html>
